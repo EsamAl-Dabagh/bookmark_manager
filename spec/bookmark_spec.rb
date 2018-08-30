@@ -7,28 +7,31 @@ describe Bookmark do
   describe ".all" do
     it "shows all of the bookmarks" do
 
-      Bookmark.add("http://www.makersacademy.com")
-      Bookmark.add("http://www.google.com")
-      Bookmark.add("http://www.destroyallsoftware.com")
+      Bookmark.add("http://www.makersacademy.com", "Makers")
+      Bookmark.add("http://www.google.com", "Google")
+      Bookmark.add("http://www.destroyallsoftware.com", "Destroy All Software")
       
       bookmarks = Bookmark.all
+      bookmark = bookmarks.first
 
-      expect(bookmarks).to include("http://www.makersacademy.com")
-      expect(bookmarks).to include("http://www.google.com")
-      expect(bookmarks).to include("http://www.destroyallsoftware.com")
+      expect(bookmark.title).to include("Makers")
+      expect(bookmark).to respond_to(:id)
+      expect(bookmark.url).to include("http://www.makersacademy.com")
+      expect(bookmarks.length).to eq(3)
     end
   end
 
   describe ".add" do
     it "adds a new bookmark" do
-      Bookmark.add("http://www.ebay.co.uk")
+      Bookmark.add("http://www.ebay.co.uk", "Ebay")
       bookmarks = Bookmark.all
-
-      expect(bookmarks).to include("http://www.ebay.co.uk")
+      bookmark = bookmarks.first
+      
+      expect(bookmark.title).to include("Ebay")
     end
 
     it "doesn't add an entry if the url supplied is invalid" do
-      Bookmark.add("not valid")
+      Bookmark.add("not valid", "the title")
       expect(Bookmark.all).not_to include("not valid")
     end
   end
