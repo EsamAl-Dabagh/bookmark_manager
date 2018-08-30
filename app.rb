@@ -12,7 +12,7 @@ class BookmarkManager < Sinatra::Base
     erb :bookmarks
   end
 
-  post "/add" do
+  post "/bookmarks/add" do
     Bookmark.add(params[:url])
 
     redirect "/bookmarks"
