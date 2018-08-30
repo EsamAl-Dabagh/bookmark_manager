@@ -21,12 +21,15 @@ describe Bookmark do
 
   describe ".add" do
     it "adds a new bookmark" do
-
       Bookmark.add("http://www.ebay.co.uk")
       bookmarks = Bookmark.all
 
       expect(bookmarks).to include("http://www.ebay.co.uk")
-      
+    end
+
+    it "doesn't add an entry if the url supplied is invalid" do
+      Bookmark.add("not valid")
+      expect(Bookmark.all).not_to include("not valid")
     end
   end
 

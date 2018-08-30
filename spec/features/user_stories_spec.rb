@@ -17,3 +17,13 @@ feature "bookmark list" do
     expect(page).to have_content("http://ebay.co.uk")
   end
 end
+
+feature "validate submitted url" do
+  scenario "checks the inputted url" do
+    visit '/bookmarks'
+    fill_in 'url', with: "htp://not real"
+    click_button "Add"
+    expect(page).not_to have_content("htp://not real")
+    expect(page).to have_content("You must submit a valid URL")
+  end
+end
