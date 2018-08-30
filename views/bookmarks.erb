@@ -4,3 +4,9 @@
     <li> <%= bookmark %> </li>
   <% end %>
 </ul>
+
+<form action="/add" method="post"> 
+  <label for="url">Enter URL</label>
+  <input type="text" name="url" required>
+  <button>Add</button>
+</form>

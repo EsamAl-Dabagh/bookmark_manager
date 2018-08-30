@@ -20,4 +20,15 @@ describe Bookmark do
     end
   end
 
+  describe ".add" do
+    it "adds a new bookmark" do
+
+      Bookmark.add("http://www.ebay.co.uk")
+      bookmarks = Bookmark.all
+
+      expect(bookmarks).to include("http://www.ebay.co.uk")
+      
+    end
+  end
+
 end

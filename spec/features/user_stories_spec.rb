@@ -11,4 +11,11 @@ feature "bookmark list" do
     expect(page).to have_content("http://www.google.com")
     expect(page).to have_content("http://www.destroyallsoftware.com")
   end
+
+  scenario "can add new bookmarks" do
+    visit '/bookmarks'
+    fill_in 'url', with: "http://ebay.co.uk"
+    click_button "Add"
+    expect(page).to have_content("http://ebay.co.uk")
+  end
 end
