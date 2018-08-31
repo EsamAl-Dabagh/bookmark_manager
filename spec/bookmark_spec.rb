@@ -26,13 +26,24 @@ describe Bookmark do
       Bookmark.add("http://www.ebay.co.uk", "Ebay")
       bookmarks = Bookmark.all
       bookmark = bookmarks.first
-      
+
       expect(bookmark.title).to include("Ebay")
     end
 
     it "doesn't add an entry if the url supplied is invalid" do
       Bookmark.add("not valid", "the title")
       expect(Bookmark.all).not_to include("not valid")
+    end
+  end
+
+  describe ".delete" do
+    it "removes bookmark from database" do
+
+      connection = PG.connect(dbname: "bookmark_manager_test")
+      connection.exec("INSERT INTO bookmarks VALUES(1, 'http://www.makersacademy.com', 'Makers');")
+      Bookmark.delete(1)
+
+      expect(Bookmark.all).to eq([])
     end
   end
 

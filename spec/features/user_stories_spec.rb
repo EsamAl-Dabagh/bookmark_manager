@@ -29,3 +29,14 @@ feature "validate submitted url" do
     expect(page).to have_content("You must submit a valid URL")
   end
 end
+
+feature "removes bookmark" do
+  scenario "delete unwanted bookmark" do
+    Bookmark.add("http://google.com", "Google")
+
+    visit '/bookmarks'
+    first('.bookmark').click_button("Delete")
+
+    expect(page).not_to have_link("Google")
+  end
+end
